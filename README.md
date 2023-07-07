@@ -16,7 +16,7 @@ curl -O https://raw.githubusercontent.com/nntrn/so.sh/main/so.sh
 
 * **Step 1.** Copy answer share link
   
-  <img src="assets/copy-link.png" width="50%">
+  <img src="assets/copy-link.png" width="30%">
 
 * **Step 2.** 
   ```
