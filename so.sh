@@ -51,10 +51,13 @@ JQ_CMD='
 ] | join("\n") | gsub("\r";"")
 '
 
-jq -r "$JQ_CMD" $API_CACHE_JSON >$MARKDOWN_FILE
-sed -i 's/&nbsp;/ /g; s/&amp;/\&/g; s/&lt;/\</g; s/&gt;/\>/g; s/&#\(x27\|39\);/\'"'"'/g; s/&\(ldquo\|rdquo\|quot\);/\"/g;' $MARKDOWN_FILE
+# jq -r "$JQ_CMD" $API_CACHE_JSON >$MARKDOWN_FILE
+# sed -i 's/&nbsp;/ /g; s/&amp;/\&/g; s/&lt;/\</g; s/&gt;/\>/g; s/&#\(x27\|39\);/\'"'"'/g; s/&\(ldquo\|rdquo\|quot\);/\"/g;' $MARKDOWN_FILE
 
-cat $MARKDOWN_FILE
+jq -r "$JQ_CMD" $API_CACHE_JSON |
+  sed 's/&nbsp;/ /g; s/&amp;/\&/g; s/&lt;/\</g; s/&gt;/\>/g; s/&#\(x27\|39\);/\'"'"'/g; s/&\(ldquo\|rdquo\|quot\);/\"/g;' |
+  cat -s |
+  tee $MARKDOWN_FILE
 
 _var API_CACHE_JSON "$API_CACHE_JSON"
 _var API_ANSWER_URL "'${API_ANSWER_URL%&key=*}'"
